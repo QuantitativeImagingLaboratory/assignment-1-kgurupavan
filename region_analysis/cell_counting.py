@@ -16,7 +16,7 @@ class cell_counting:
             for j in range(1,col):
                 if image[i, j] == 0 and image[i, j-1] == 255 and image[i-1, j] == 255:
                     R[i, j] = k
-                    k = k + 1;
+                    k = k + 1
                 if image[i, j] == 0 and image[i, j-1] == 255 and image[i-1, j] == 0:
                     R[i, j] = R[i - 1, j]
                 if image[i, j] == 0 and image[i, j-1] == 0 and image[i-1, j] == 255:
@@ -24,7 +24,7 @@ class cell_counting:
                 if image[i, j] == 0 and image[i, j-1] == 0 and image[i-1, j] == 0:
                     R[i, j] = R[i - 1, j]
                     if R[i, j - 1] != R[i-1, j]:
-                        R[i,j-1]=R[i-1,j]
+                        R[i,j-1] = R[i-1,j]
 
 
         regions = dict()
@@ -35,7 +35,7 @@ class cell_counting:
                     regions[R[i,j]].append([i,j])
                 else:
                     regions[R[i,j]]=[[i,j]]
-
+        del regions[0] #removing background color
         return regions
 
 
@@ -45,6 +45,7 @@ class cell_counting:
         region: a list of pixels in a region
         returns: area"""
         stats=dict()
+        r=1
         for key,value in region.items():
             x_centroid=0
             y_centroid=0
@@ -57,7 +58,8 @@ class cell_counting:
             mark=round(len(value)/2)
             centroid=[x_centroid,y_centroid]
             if(len(value)>=15):
-                stats[key] =[value[mark],centroid,len(value)]
+                stats[r] =[value[mark],centroid,len(value)]
+                r=r+1
         print(len(stats))
         for key,value in stats.items():
            print("Region:",key,"Area:",value[2],"Centroid:",value[1])
@@ -79,8 +81,8 @@ class cell_counting:
             msg=str(value[1][0])+","+str(value[1][1])
             pixel=(value[1][0],value[1][1])
             font=cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(image,"*",pixel, font, 0.2, (152,0,0))
-            cv2.putText(image, msg, pixel, font, 0.2, (152, 0, 0))
+            cv2.putText(image,"*\n"+str(key),pixel, font, 0.2, (152,0,0))
+
 
         return image
 
