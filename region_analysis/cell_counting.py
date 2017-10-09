@@ -59,8 +59,8 @@ class cell_counting:
             if(len(value)>=15):
                 stats[key] =[value[mark],centroid,len(value)]
         print(len(stats))
-       # for key,value in stats.items():
-        #    print("Region:",key,"Area:",value[2],"Centroid:",value[1])
+        for key,value in stats.items():
+           print("Region:",key,"Area:",value[2],"Centroid:",value[1])
 
         # Please print your region statistics to stdout
         # <region number>: <location or center>, <area>
