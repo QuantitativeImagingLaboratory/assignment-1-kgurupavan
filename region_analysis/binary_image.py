@@ -14,7 +14,7 @@ class binary_image:
         for i in range(0,row):
             for j in range(0,col):
                 hist[(image[i,j])] = hist[(image[i,j])] + 1
-        print(hist)
+
         return hist
 
     def find_optimal_threshold(self, hist):
@@ -24,29 +24,32 @@ class binary_image:
         returns: an optimal threshold value"""
         exp1=0
         exp2=0
-        total_count=0
-        t= round(len(hist)/2)
+        total_count1=0
+        total_count2=0
+        t= round((len(hist)-1)/2)
 
-        for i in range(0, len(hist)):
-                total_count = total_count + hist[i]
-        diff=len(hist)
+        diff=len(hist)-1
         while True:
-            if diff < 1:
-                break
-            else:
+
                 for i in range(0, t):
-                    exp1 = exp1 + (i * (hist[i] / total_count))
+                    total_count1 = total_count1 + hist[i]
+                for i in range(0, t):
+                    exp1 = exp1 + (i * (hist[i] / total_count1))
+                for i in range(t, len(hist)):
+                    total_count2 = total_count2 + hist[i]
 
                 for i in range(t, len(hist)):
-                    exp2 = exp2 + (i * (hist[i] / total_count))
+                    exp2 = exp2 + (i * (hist[i] / total_count2))
 
                 new_t = (((exp1 + exp2) / 2))
                 diff= new_t - t
                 t=int(new_t)
+                if diff > 1:
+                    break
 
 
 
-        threshold = t
+        threshold = new_t
 
         return threshold
 
@@ -60,9 +63,9 @@ class binary_image:
         for i in range(0,bin_img.shape[0]):
             for j in range(0,bin_img.shape[1]):
                 if bin_img[i,j] > threshold:
-                     bin_img[i,j]=255
-                else:
                      bin_img[i,j]=0
+                else:
+                     bin_img[i,j]=255
 
         return bin_img
 

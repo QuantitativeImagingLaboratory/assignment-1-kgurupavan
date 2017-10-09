@@ -9,19 +9,20 @@ class cell_counting:
         return: a list of regions"""
         row = image.shape[0]
         col = image.shape[1]
+        print(row,col)
         R= np.zeros(shape=(row,col))
         k=1
         list=[]
-        for i in range(0,row):
-            for j in range(0,col):
-                if image[i, j] == 255 and image[i, j-1] == 0 and image[i-1, j] == 0:
+        for i in range(1,row):
+            for j in range(1,col):
+                if image[i, j] == 0 and image[i, j-1] == 255 and image[i-1, j] == 255:
                     R[i, j] = k
                     k = k + 1;
-                if image[i, j] == 255 and image[i, j-1] == 0 and image[i-1, j] == 255:
+                if image[i, j] == 0 and image[i, j-1] == 255 and image[i-1, j] == 0:
                     R[i, j] = R[i - 1, j]
-                if image[i, j] == 255 and image[i, j-1] == 255 and image[i-1, j] == 0:
+                if image[i, j] == 0 and image[i, j-1] == 0 and image[i-1, j] == 255:
                     R[i, j] = R[i, j - 1]
-                if image[i, j] == 255 and image[i, j-1] == 255 and image[i-1, j] == 255:
+                if image[i, j] == 0 and image[i, j-1] == 0 and image[i-1, j] == 0:
                     R[i, j] = R[i - 1, j]
                     if R[i, j - 1] != R[i-1, j]:
                         R[i,j-1]=R[i-1,j]
@@ -59,8 +60,8 @@ class cell_counting:
             if(len(value)>=15):
                 stats[key] =[value[mark],centroid,len(value)]
         print(len(stats))
-        for key,value in stats.items():
-            print("Region:",key,"Area:",value[2],"Centroid:",value[1])
+       # for key,value in stats.items():
+        #    print("Region:",key,"Area:",value[2],"Centroid:",value[1])
 
         # Please print your region statistics to stdout
         # <region number>: <location or center>, <area>
