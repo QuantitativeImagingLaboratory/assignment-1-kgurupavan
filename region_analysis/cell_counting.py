@@ -9,7 +9,6 @@ class cell_counting:
         return: a list of regions"""
         row = image.shape[0]
         col = image.shape[1]
-        print(row,col)
         R= np.zeros(shape=(row,col))
         k=1
         list=[]
@@ -80,7 +79,8 @@ class cell_counting:
             msg=str(value[1][0])+","+str(value[1][1])
             pixel=(value[1][0],value[1][1])
             font=cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(image,"*",pixel, font, 0.2, (121,0,0))
+            cv2.putText(image,"*",pixel, font, 0.2, (152,0,0))
+            cv2.putText(image, msg, pixel, font, 0.2, (152, 0, 0))
 
         return image
 
