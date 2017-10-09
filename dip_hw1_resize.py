@@ -3,9 +3,9 @@
 #Example Usage: ./dip_hw1_resize -i imagename.jpg -fx 1.5 -fy = 1.5 -m nearest_neighbor
 #Example Usage: ./dip_hw1_resize -i imagename.jpg -fx 1.5 -fy = 1.5 -m bilinear
 
-__author__      = "Pranav Mantini"
-__email__ = "pmantini@uh.edu"
-__version__ = "1.0.0"
+#__author__      = "Pranav Mantini"
+#__email__ = "pmantini@uh.edu"pmantini@uh.edu
+#__version__ = "1.0.0"
 
 import cv2
 import sys
@@ -88,7 +88,6 @@ def main():
 
     output_image_name = outputDir+image_name+interpolation+datetime.now().strftime("%m%d-%H%M%S")+".jpg"    
     cv2.imwrite(output_image_name, resampled_image)
-
 
 if __name__ == "__main__":
     main()

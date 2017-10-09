@@ -60,7 +60,7 @@ def main():
     threshold = bin_img.find_optimal_threshold(hist)
     print("Optimal threshold: ", threshold)
 
-    binary_img = bin_img.binarize(input_image)
+    binary_img = bin_img.binarize(input_image,threshold)
     output_image_name = outputDir + "binary_image_" + datetime.now().strftime("%m%d-%H%M%S") + ".jpg"
     cv2.imwrite(output_image_name, binary_img)
 
